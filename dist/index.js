@@ -24,12 +24,30 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // importaçao de bibliotecas
-const http = __importStar(require("http"));
+const http_1 = require("http");
+const query_string_1 = require("query-string");
+const fs_1 = require("fs");
+const url = __importStar(require("url"));
 // Definiçao de porta
 const port = 5000;
-const server = http.createServer((request, response) => {
+const server = (0, http_1.createServer)((request, response) => {
     // Implementar codigo aqui
-    response.end(`Hello World`);
+    const urlparse = url.parse(request.url ? request.url : "", true);
+    let resposta;
+    // receber informaçoes do usuario
+    const params = (0, query_string_1.parse)(urlparse.search ? urlparse.search : "");
+    // Criar um usuario - Atualizar um usuario
+    if (urlparse.pathname == "/criar-atualizar-usuario") {
+        // Salvar informacoes
+        (0, fs_1.writeFile)(`users/${params.id}.txt`, JSON.stringify(params), function (err) {
+            if (err)
+                throw err;
+            resposta = "Usuario criado!";
+            response.statusCode = 200;
+            response.setHeader("Content-Type", "text/plain");
+            response.end(resposta);
+        });
+    }
 });
 // Execuçao
 server.listen(port, () => {
