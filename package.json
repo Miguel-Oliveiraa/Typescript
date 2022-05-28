@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-ts",
+  "version": "1.0.0",
+  "description": "Projeto de teste do Typescript.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "typescript"
+  ],
+  "author": "Miguel Oliveira",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^17.0.36",
+    "query-string": "^7.1.1",
+    "typescript": "^4.7.2"
+  }
+}
